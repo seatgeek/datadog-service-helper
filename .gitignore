@@ -1,0 +1,6 @@
+/vendor/
+!/vendor/vendor.json
+/build/
+*.yaml
+datadog-service-helper
+.vscode/

@@ -1,0 +1,32 @@
+sudo: required
+
+language: go
+
+go:
+  - 1.8.1
+
+cache:
+  directories:
+    - vendor/github.com
+    - vendor/golang.org
+    - vendor/gopkg.in
+
+env:
+  global:
+    - GOBUILD="linux-amd64 windows-amd64 darwin-amd64"
+
+script:
+  - GOBUILD=${GOBUILD} make -j build
+  - ls -la build
+
+deploy:
+  - provider: releases
+    api_key: ${GITHUB_API_KEY}
+    file:
+      - build/datadog-service-helper-linux-amd64
+      - build/datadog-service-helper-windows-amd64
+      - build/datadog-service-helper-darwin-amd64
+    skip_cleanup: true
+    overwrite: true
+    on:
+      tags: true

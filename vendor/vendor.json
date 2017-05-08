@@ -1,0 +1,85 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "dvabztWVQX8f6oMLRyv4dLH+TGY=",
+			"path": "github.com/davecgh/go-spew/spew",
+			"revision": "346938d642f2ec3594ed81d874461961cd0faa76",
+			"revisionTime": "2016-10-29T20:57:26Z"
+		},
+		{
+			"checksumSHA1": "g/V4qrXjUGG9B+e3hB+4NAYJ5Gs=",
+			"path": "github.com/gorilla/context",
+			"revision": "08b5f424b9271eedf6f9f0ce86cb9396ed337a42",
+			"revisionTime": "2016-08-17T18:46:32Z"
+		},
+		{
+			"checksumSHA1": "zmCk+lgIeiOf0Ng9aFP9aFy8ksE=",
+			"path": "github.com/gorilla/mux",
+			"revision": "4c1c3952b7d9d0a061a3fa7b36fd373ba0398ebc",
+			"revisionTime": "2017-04-27T04:12:50Z"
+		},
+		{
+			"checksumSHA1": "FXiaccMs+1NvIHh8W44lQJeGqms=",
+			"path": "github.com/hashicorp/consul/api",
+			"revision": "0346e3e64f4b16143b55348d5fc30c582b6ddcfc",
+			"revisionTime": "2017-01-04T22:12:42Z"
+		},
+		{
+			"checksumSHA1": "Uzyon2091lmwacNsl1hCytjhHtg=",
+			"path": "github.com/hashicorp/go-cleanhttp",
+			"revision": "ad28ea4487f05916463e2423a55166280e8254b5",
+			"revisionTime": "2016-04-07T17:41:26Z"
+		},
+		{
+			"checksumSHA1": "E3Xcanc9ouQwL+CZGOUyA/+giLg=",
+			"path": "github.com/hashicorp/serf/coordinate",
+			"revision": "d3a67ab21bc8a4643fa53a3633f2d951dd50c6ca",
+			"revisionTime": "2016-12-07T01:17:43Z"
+		},
+		{
+			"checksumSHA1": "uxdfA/xMBbIZ89WdzjeDYM2N8Gw=",
+			"path": "github.com/imkira/go-observer",
+			"revision": "2b5c0039075a41408f1a33aa6391bd77d3e5a132",
+			"revisionTime": "2016-09-18T09:16:08Z"
+		},
+		{
+			"checksumSHA1": "8z32QKTSDusa4QQyunKE4kyYXZ8=",
+			"path": "github.com/patrickmn/go-cache",
+			"revision": "e7a9def80f35fe1b170b7b8b68871d59dea117e1",
+			"revisionTime": "2016-11-25T23:48:19Z"
+		},
+		{
+			"checksumSHA1": "EQ2/or26VNv0IxjJluomfEmqG8o=",
+			"path": "github.com/scukonick/go-fastcgi-client",
+			"revision": "ffa850d2920a025454f2120d5b7f342b8c90ed03",
+			"revisionTime": "2015-11-25T05:27:41Z"
+		},
+		{
+			"checksumSHA1": "n9ab10xa//8gFwwD/wCXywBUrlo=",
+			"path": "github.com/sirupsen/logrus",
+			"revision": "881bee4e20a5d11a6a88a5667c6f292072ac1963",
+			"revisionTime": "2016-12-02T02:35:07Z"
+		},
+		{
+			"checksumSHA1": "uTQtOqR0ePMMcvuvAIksiIZxhqU=",
+			"path": "golang.org/x/sys/unix",
+			"revision": "d75a52659825e75fff6158388dddc6a5b04f9ba5",
+			"revisionTime": "2016-12-14T18:38:57Z"
+		},
+		{
+			"checksumSHA1": "hiOUviIMDKo7y918uBiEhfJyOkk=",
+			"path": "gopkg.in/tylerb/graceful.v1",
+			"revision": "50a48b6e73fcc75b45e22c05b79629a67c79e938",
+			"revisionTime": "2016-08-29T01:00:30Z"
+		},
+		{
+			"checksumSHA1": "12GqsW8PiRPnezDDy0v4brZrndM=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "a5b47d31c556af34a302ce5d659e6fea44d90de0",
+			"revisionTime": "2016-09-28T15:37:09Z"
+		}
+	],
+	"rootPath": "github.com/seatgeek/datadog-service-helper"
+}
