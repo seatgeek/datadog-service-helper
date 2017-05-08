@@ -21,7 +21,8 @@ script:
 
 deploy:
   - provider: releases
-    api_key: ${GITHUB_API_KEY}
+    api_key:
+      secure: EQGlIDfEwbDpR08/JakSOmLNC04HBdHWk5nz+gPDUEHyOPnaIeCAkTfdrbnUOKpEXaM+rQW/j0s8OaFHfE/uio3eJMaz8Qp5WETms2umFRLhK0Du/ELvnkf28qDSIftdPo2YNsWIkHsBagrN388jx0t9RIV2gjuWH8Uw/zUDflrCmuWCEeL8eXL/3HttE18QhbHOKvwsfGbwTS2phCUzCLGfcYseTSwDAmCCHFGPxI0dz7WXnArlQvCODTGsdCvqhRIZ1PPZO3npfUt4jkkT83M2whnVFeBcKR6AbV+7WAu7fQxQJyIEPbpr4Xj2qhDueT6FNP9wZd7yO7grbtAxRRp6+vG+WGHo9lfOA4Auq9Smb8/Jx7KPmvu8u+94vWFYNs2+wzPCIQIAZagYj+qN4Z3Z2Nr1P9ApfosTLFu0Uuu3IygtVR6W8BTSw9IAeo2yDgN8VIX8xewpzf8wJtaAldMventy89mmadGK+/i3NIGEgfjibEG5OdtZ7L9Z0C0KoSVoB/qt81MFm4uS1qG85S1a/Or8lZwLKRAOdH7kuRHK/f5WECSS9ixIN9FHVG3JxHzNoJSrLZN/bNPuG4DIs8KKsoqSGcVW26pdQMbyrni7qVBbO6qTBBXLRyNW6g7qWoUqnn+d3HTvw1DAw4COgaZ8zgW8TgCVYcemnV07jCw=
     file:
       - build/datadog-service-helper-linux-amd64
       - build/datadog-service-helper-windows-amd64
