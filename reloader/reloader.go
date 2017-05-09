@@ -44,14 +44,14 @@ func (r *Reloader) Start() {
 		case <-timer.C:
 			r.mutex.Lock()
 
-			logger.Infof("Reloader ticker start")
+			logger.Debugf("Reloader ticker start")
 
 			if r.shouldReload {
 				r.reloadDataDogService()
 				r.shouldReload = false
 			}
 
-			logger.Infof("Reloader ticker stop")
+			logger.Debugf("Reloader ticker stop")
 
 			r.mutex.Unlock()
 		}
