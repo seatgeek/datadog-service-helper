@@ -169,8 +169,7 @@ func getListenPort() int {
 
 func showExprVar(w http.ResponseWriter, r *http.Request) {
 	metrics := make([]map[string]string, 0)
-	metrics = append(metrics, map[string]string{"path": "php_fpm_instances"})
-	metrics = append(metrics, map[string]string{"path": "datadog_reload"})
+	metrics = append(metrics, map[string]string{"path": "datadog_agent_reloads"})
 
 	config := struct {
 		ExpvarURL string              `yaml:"expvar_url"`
