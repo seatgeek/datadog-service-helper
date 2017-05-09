@@ -159,13 +159,12 @@ func getListenPort() int {
 		return 4000
 	}
 
-	i, err := strconv.ParseInt(port, 10, 64)
+	i, err := strconv.Atoi(port)
 	if err != nil {
 		logger.Fatalf(err.Error())
-		return -100
 	}
 
-	return int(i)
+	return i
 }
 
 func showExprVar(w http.ResponseWriter, r *http.Request) {
@@ -178,7 +177,7 @@ func showExprVar(w http.ResponseWriter, r *http.Request) {
 		Tags      []string            `yaml:"tags"`
 		Metrics   []map[string]string `yaml:"metrics"`
 	}{
-		"http://127.0.0.1:" + string(listenPort) + "/debug/vars",
+		fmt.Sprintf("http://127.0.0.1:%d/debug/vars", listenPort),
 		[]string{"service:datadog-service-helper"},
 		metrics,
 	}
