@@ -52,7 +52,7 @@ func main() {
 
 	// create quitCh
 	quitCh := make(cfg.QuitChannel)
-	reloadCh := make(cfg.ReloadChannel)
+	reloadCh := make(cfg.ReloadChannel, 10)
 
 	// create service payload sent to all backends
 	payload := &cfg.ServicePayload{

@@ -60,7 +60,7 @@ func Observe(payload *cfg.ServicePayload) {
 				check.PingReply = "pong"
 				check.StatusURL = fmt.Sprintf("http://%s:%d/php-fpm/%s/%s/%d/status", service.Address, payload.ListenPort, projectName, service.Address, service.Port)
 				check.Tags = []string{
-					fmt.Sprintf("project:%s", projectName),
+					fmt.Sprintf("service:%s", projectName),
 				}
 
 				t.Instances = append(t.Instances, check)

@@ -35,7 +35,10 @@ func (r *Reloader) Start() {
 
 		case <-r.payload.ReloadCh:
 			r.mutex.Lock()
+
+			logger.Info("Marking datadog-agent for reloading")
 			r.shouldReload = true
+
 			r.mutex.Unlock()
 
 		case <-timer.C:

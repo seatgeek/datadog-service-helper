@@ -1,6 +1,7 @@
 package redisdb
 
 import (
+	"fmt"
 	"os"
 	"sort"
 	"time"
@@ -55,6 +56,9 @@ func Observe(payload *cfg.ServicePayload) {
 				check := &ConfigItem{
 					Host: service.Address,
 					Port: service.Port,
+					Tags: []string{
+						fmt.Sprintf("service:%s", service.Service),
+					},
 				}
 
 				t.Instances = append(t.Instances, check)
