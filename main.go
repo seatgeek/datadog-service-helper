@@ -14,7 +14,7 @@ import (
 	cfg "github.com/seatgeek/datadog-service-helper/config"
 
 	reloader "github.com/seatgeek/datadog-service-helper/reloader"
-	go_exprvar "github.com/seatgeek/datadog-service-helper/services/goexprvar"
+	go_expvar "github.com/seatgeek/datadog-service-helper/services/goexpvar"
 	php_fpm "github.com/seatgeek/datadog-service-helper/services/phpfpm"
 	redisdb "github.com/seatgeek/datadog-service-helper/services/redisdb"
 
@@ -73,13 +73,13 @@ func main() {
 
 	// start service observers
 	go php_fpm.Observe(payload)
-	go go_exprvar.Observe(payload)
+	go go_expvar.Observe(payload)
 	go redisdb.Observe(payload)
 
 	// start the http reserver that proxies http requests to php-cgi
 	router := mux.NewRouter()
 	router.Handle("/debug/vars", http.DefaultServeMux)
-	router.HandleFunc("/datadog/expvar", showExprVar)
+	router.HandleFunc("/datadog/expvar", showExpVar)
 	router.HandleFunc("/php-fpm/{project}/{ip}/{port}/{type}", php_fpm.Proxy)
 
 	logger.Infof("")
@@ -167,7 +167,7 @@ func getListenPort() int {
 	return i
 }
 
-func showExprVar(w http.ResponseWriter, r *http.Request) {
+func showExpVar(w http.ResponseWriter, r *http.Request) {
 	metrics := make([]map[string]string, 0)
 	metrics = append(metrics, map[string]string{"path": "datadog_agent_reloads"})
 
@@ -183,7 +183,7 @@ func showExprVar(w http.ResponseWriter, r *http.Request) {
 
 	resp, err := yaml.Marshal(&config)
 	if err != nil {
-		message := fmt.Sprintf("[showExprVar] Could not marshal YAML: %s", err)
+		message := fmt.Sprintf("[showExpVar] Could not marshal YAML: %s", err)
 		logger.Errorf(message)
 		http.Error(w, message, 500)
 		return

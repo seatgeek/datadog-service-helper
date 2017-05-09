@@ -4,19 +4,16 @@ import (
 	"fmt"
 	"os"
 	"sort"
-	"time"
 
 	consul "github.com/hashicorp/consul/api"
-	cache "github.com/patrickmn/go-cache"
 	cfg "github.com/seatgeek/datadog-service-helper/config"
 	"github.com/sirupsen/logrus"
 	yaml "gopkg.in/yaml.v2"
 )
 
-var goExprConfigCache = cache.New(30*time.Minute, 30*time.Second)
 var logger = logrus.New()
 
-// Observe changes in Consul catalog for go-exprvar
+// Observe changes in Consul catalog for redisdb
 func Observe(payload *cfg.ServicePayload) {
 	filePath := os.Getenv("REDISDB_CONFIG_FILE")
 	if filePath == "" {
@@ -79,7 +76,7 @@ func Observe(payload *cfg.ServicePayload) {
 			}
 
 			payload.ReloadCh <- cfg.ReloadPayload{
-				Service: "go-exprvar",
+				Service: "redisdb",
 				OldHash: currentHash,
 				NewHash: newHash,
 			}

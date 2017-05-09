@@ -1,4 +1,4 @@
-package goexprvar
+package goexpvar
 
 import (
 	"fmt"
@@ -15,12 +15,12 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
-var goExprConfigCache = cache.New(30*time.Minute, 30*time.Second)
+var configCache = cache.New(30*time.Minute, 30*time.Second)
 var logger = logrus.New()
 
-// Observe changes in Consul catalog for go-exprvar
+// Observe changes in Consul catalog for go-expvar
 func Observe(payload *cfg.ServicePayload) {
-	filePath := os.Getenv("GO_EXPR_CONFIG_FILE")
+	filePath := os.Getenv("GO_EXPVAR_CONFIG_FILE")
 	if filePath == "" {
 		filePath = "/etc/dd-agent/conf.d/go_expvar.yaml"
 	}
@@ -49,17 +49,17 @@ func Observe(payload *cfg.ServicePayload) {
 			services := stream.Value().(map[string]*consul.AgentService)
 
 			for _, service := range services {
-				if !cfg.ServiceEnabled("go-exprvar", service.Tags) {
-					logger.Debugf("[go-exprvar] Service %s does not contain 'dd-go-exprvar' tag", service.Service)
+				if !cfg.ServiceEnabled("go-expvar", service.Tags) {
+					logger.Debugf("[go-expvar] Service %s does not contain 'dd-go-expvar' tag", service.Service)
 					continue
 				}
-				logger.Infof("[go-exprvar] Service %s tags does contain 'dd-go-exprvar'", service.Service)
+				logger.Infof("[go-expvar] Service %s tags does contain 'dd-go-expvar'", service.Service)
 
 				url := fmt.Sprintf("http://%s:%d/datadog/expvar", service.Address, service.Port)
 
 				check, err := getRemoteConfig(url)
 				if err != nil {
-					logger.Warnf("[go-exprvar] Could not get remote config for %s: %s", url, err)
+					logger.Warnf("[go-expvar] Could not get remote config for %s: %s", url, err)
 					continue
 				}
 
@@ -69,21 +69,21 @@ func Observe(payload *cfg.ServicePayload) {
 			}
 
 			// Sort the services by name so we get consistent output across runs
-			sort.Sort(GoExprServiceSorter(t.Instances))
+			sort.Sort(ServiceSorter(t.Instances))
 
 			data, err := yaml.Marshal(&t)
 			if err != nil {
-				logger.Fatalf("[go-exprvar] could not marshal yaml: %v", err)
+				logger.Fatalf("[go-expvar] could not marshal yaml: %v", err)
 			}
 
-			reloadRequired, newHash := cfg.WriteIfChange("go-exprvar", filePath, data, currentHash)
+			reloadRequired, newHash := cfg.WriteIfChange("go-expvar", filePath, data, currentHash)
 			if !reloadRequired {
 				currentHash = newHash
 				continue
 			}
 
 			payload.ReloadCh <- cfg.ReloadPayload{
-				Service: "go-exprvar",
+				Service: "go-expvar",
 				OldHash: currentHash,
 				NewHash: newHash,
 			}
@@ -94,7 +94,7 @@ func Observe(payload *cfg.ServicePayload) {
 }
 
 func getRemoteConfig(url string) (config *ConfigItem, err error) {
-	cached, found := goExprConfigCache.Get(url)
+	cached, found := configCache.Get(url)
 	if found {
 		config = cached.(*ConfigItem)
 		return config, nil
@@ -116,13 +116,13 @@ func getRemoteConfig(url string) (config *ConfigItem, err error) {
 		return nil, fmt.Errorf("Could not marshal response into YAML '%s', %s", url, err.Error())
 	}
 
-	goExprConfigCache.Set(url, config, cache.DefaultExpiration)
+	configCache.Set(url, config, cache.DefaultExpiration)
 	return config, nil
 }
 
-// GoExprServiceSorter sorts planets by ExpvarURL
-type GoExprServiceSorter []*ConfigItem
+// ServiceSorter sorts planets by ExpvarURL
+type ServiceSorter []*ConfigItem
 
-func (a GoExprServiceSorter) Len() int           { return len(a) }
-func (a GoExprServiceSorter) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a GoExprServiceSorter) Less(i, j int) bool { return a[i].ExpvarURL < a[j].ExpvarURL }
+func (a ServiceSorter) Len() int           { return len(a) }
+func (a ServiceSorter) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a ServiceSorter) Less(i, j int) bool { return a[i].ExpvarURL < a[j].ExpvarURL }

@@ -14,7 +14,7 @@ Nomad example:
 service {
     name = "datadog-service-helper"
     port = "http"
-    tags = ["dd-go-exprvar"]
+    tags = ["dd-go-expvar"]
 }
 ```
 
@@ -26,11 +26,11 @@ service {
 
 Required service tag `dd-php-fpm`
 
-### go_exprvar
+### go_expvar
 
-- `GO_EXPR_TARGET_FILE` (default: `/etc/dd-agent/conf.d/go_expvar.yaml`) path to the dd-agent `go_expr.yaml` file.
+- `GO_EXPVAR_CONFIG_FILE` (default: `/etc/dd-agent/conf.d/go_expvar.yaml`) path to the dd-agent `go_expvar.yaml` file.
 
-Required service tag `dd-go-exprvar`
+Required service tag `dd-go-expvar`
 
 ### redis
 
@@ -51,8 +51,9 @@ For easy Local development run
 ```
 go install && \
     DONT_RELOAD_DATADOG=1 \
-    TARGET_FILE_GO_EXPR=go_expr.yaml \
-    TARGET_FILE_PHP_FPM=php_fpm.yaml \
+    GO_EXPVAR_CONFIG_FILE=go_expvar.yaml \
+    PHP_FPM_CONFIG_FILE=php_fpm.yaml \
+    REDIS_TARGET_FILE=redis.yaml \
     CONSUL_HTTP_ADDR=<consul client address>:8500 \
     datadog-fpm-monitor
 ```

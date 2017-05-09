@@ -1,4 +1,4 @@
-package goexprvar
+package goexpvar
 
 // Config ...
 type Config struct {
