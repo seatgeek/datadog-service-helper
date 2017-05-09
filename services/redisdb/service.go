@@ -70,6 +70,7 @@ func Observe(payload *cfg.ServicePayload) {
 
 			reloadRequired, newHash := cfg.WriteIfChange("redisdb", filePath, data, currentHash)
 			if !reloadRequired {
+				currentHash = newHash
 				continue
 			}
 

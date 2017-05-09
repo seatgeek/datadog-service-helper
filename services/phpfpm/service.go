@@ -79,6 +79,7 @@ func Observe(payload *cfg.ServicePayload) {
 
 			reloadRequired, newHash := cfg.WriteIfChange("php-fpm", filePath, data, currentHash)
 			if !reloadRequired {
+				currentHash = newHash
 				continue
 			}
 

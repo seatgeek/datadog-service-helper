@@ -61,6 +61,8 @@ func (r *Reloader) reloadDataDogService() {
 		return
 	}
 
+	logger.Warn("Reloading datadog-agent")
+
 	cmd := "/usr/sbin/service"
 	args := []string{"datadog-agent", "reload"}
 	if err := exec.Command(cmd, args...).Run(); err != nil {

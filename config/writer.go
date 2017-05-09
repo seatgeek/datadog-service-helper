@@ -19,7 +19,7 @@ func WriteIfChange(service string, filePath string, data []byte, currentHash str
 	newHash := HashBytes(data)
 	if newHash == currentHash {
 		logger.Infof("[%s] File hash is the same, NOOP", service)
-		return false, ""
+		return false, newHash
 	}
 
 	// open file for write (truncated)
@@ -27,13 +27,13 @@ func WriteIfChange(service string, filePath string, data []byte, currentHash str
 	defer file.Close()
 	if err != nil {
 		logger.Fatalf("[%s] Could not create file %s: %s", service, filePath, err)
-		return false, ""
+		return false, newHash
 	}
 
 	// write file to disk
 	if _, err := file.Write(data); err != nil {
 		logger.Errorf("[%s] Could not write file %s: %s", service, filePath, err)
-		return false, ""
+		return false, newHash
 	}
 
 	logger.Infof("[%s] Successfully updated file: %s (old: %s | new: %s)", service, filePath, currentHash, newHash)

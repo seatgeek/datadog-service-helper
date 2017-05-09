@@ -78,6 +78,7 @@ func Observe(payload *cfg.ServicePayload) {
 
 			reloadRequired, newHash := cfg.WriteIfChange("go-exprvar", filePath, data, currentHash)
 			if !reloadRequired {
+				currentHash = newHash
 				continue
 			}
 
