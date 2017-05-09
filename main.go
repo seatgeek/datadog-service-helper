@@ -179,7 +179,7 @@ func showExprVar(w http.ResponseWriter, r *http.Request) {
 		Metrics   []map[string]string `yaml:"metrics"`
 	}{
 		"http://127.0.0.1:" + string(listenPort) + "/debug/vars",
-		[]string{"project:datadog-monitor"},
+		[]string{"service:datadog-service-helper"},
 		metrics,
 	}
 

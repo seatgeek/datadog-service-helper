@@ -37,5 +37,5 @@ func WriteIfChange(service string, filePath string, data []byte, currentHash str
 	}
 
 	logger.Infof("[%s] Successfully updated file: %s (old: %s | new: %s)", service, filePath, currentHash, newHash)
-	return false, newHash
+	return true, newHash
 }
