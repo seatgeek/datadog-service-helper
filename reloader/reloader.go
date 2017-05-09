@@ -1,6 +1,7 @@
 package reloader
 
 import (
+	"expvar"
 	"os"
 	"os/exec"
 	"sync"
@@ -17,6 +18,7 @@ type Reloader struct {
 }
 
 var logger = logrus.New()
+var reloadCounter = expvar.NewInt("datadog_agent_reloads")
 
 func NewReloader(payload *cfg.ServicePayload) *Reloader {
 	return &Reloader{
@@ -59,6 +61,8 @@ func (r *Reloader) Start() {
 }
 
 func (r *Reloader) reloadDataDogService() {
+	reloadCounter.Add(1)
+
 	if os.Getenv("DONT_RELOAD_DATADOG") != "" {
 		logger.Infof("Not reloading datadog-agent (env: DONT_RELOAD_DATADOG)")
 		return
