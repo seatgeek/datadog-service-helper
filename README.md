@@ -38,6 +38,12 @@ Required service tag `dd-go-expvar`
 
 Required service tag `dd-redis`
 
+### TCP
+
+- `TCP_CHECK_CONFIG_FILE` (default: `/etc/dd-agent/conf.d/tcp_check.yaml`) path to the dd-agent `tcp_check.yaml` file.
+
+Required service tag `dd-tcp-check`
+
 ## Local development
 
 To get the dependencies and first build, please run:
