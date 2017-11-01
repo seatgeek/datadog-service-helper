@@ -16,7 +16,8 @@ import (
 	reloader "github.com/seatgeek/datadog-service-helper/reloader"
 	go_expvar "github.com/seatgeek/datadog-service-helper/services/goexpvar"
 	php_fpm "github.com/seatgeek/datadog-service-helper/services/phpfpm"
-	redisdb "github.com/seatgeek/datadog-service-helper/services/redisdb"
+	"github.com/seatgeek/datadog-service-helper/services/redisdb"
+	"github.com/seatgeek/datadog-service-helper/services/tcp"
 
 	"github.com/gorilla/mux"
 	consul "github.com/hashicorp/consul/api"
@@ -75,6 +76,7 @@ func main() {
 	go php_fpm.Observe(payload)
 	go go_expvar.Observe(payload)
 	go redisdb.Observe(payload)
+	go tcp.Observe(payload)
 
 	// start the http reserver that proxies http requests to php-cgi
 	router := mux.NewRouter()
