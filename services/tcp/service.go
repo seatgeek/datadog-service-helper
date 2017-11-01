@@ -89,9 +89,9 @@ func Observe(payload *cfg.ServicePayload) {
 	}
 }
 
-// serviceSorter sorts planets by ExpvarURL
+// serviceSorter sorts planets by Host + Port
 type serviceSorter []*ConfigItem
 
 func (a serviceSorter) Len() int           { return len(a) }
 func (a serviceSorter) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
-func (a serviceSorter) Less(i, j int) bool { return a[i].Host < a[j].Host && a[i].Port < a[j].Port }
+func (a serviceSorter) Less(i, j int) bool { return a[i].Port < a[j].Port }
