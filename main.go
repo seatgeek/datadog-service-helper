@@ -16,6 +16,7 @@ import (
 	reloader "github.com/seatgeek/datadog-service-helper/reloader"
 	go_expvar "github.com/seatgeek/datadog-service-helper/services/goexpvar"
 	php_fpm "github.com/seatgeek/datadog-service-helper/services/phpfpm"
+	"github.com/seatgeek/datadog-service-helper/services/rabbitmq"
 	"github.com/seatgeek/datadog-service-helper/services/redisdb"
 	"github.com/seatgeek/datadog-service-helper/services/tcp"
 
@@ -75,6 +76,7 @@ func main() {
 	// start service observers
 	go php_fpm.Observe(payload)
 	go go_expvar.Observe(payload)
+	go rabbitmq.Observe(payload)
 	go redisdb.Observe(payload)
 	go tcp.Observe(payload)
 
