@@ -32,6 +32,12 @@ Required service tag `dd-php-fpm`
 
 Required service tag `dd-go-expvar`
 
+### rabbitmq
+
+- `RABBITMQ_TARGET_FILE` (default: `/etc/dd-agent/conf.d/rabbitmq.yaml`) path to the dd-agent `rabbitmq.yaml` file.
+
+Required service tag `dd-rabbitmq`
+
 ### redis
 
 - `REDIS_TARGET_FILE` (default: `/etc/dd-agent/conf.d/redis.yaml`) path to the dd-agent `redis.yaml` file.
